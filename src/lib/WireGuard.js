@@ -279,12 +279,6 @@ Endpoint = ${WG_HOST}:${WG_CONFIG_PORT}`;
       expiredAt: null,
       enabled,
     };
-    if (expiredDate) {
-      client.expiredAt = new Date(expiredDate);
-      client.expiredAt.setHours(23);
-      client.expiredAt.setMinutes(59);
-      client.expiredAt.setSeconds(59);
-    }
     config.clients[id] = client;
 
     await this.saveConfig();
