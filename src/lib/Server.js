@@ -263,7 +263,7 @@ module.exports = class Server {
       */
       .post('/api/wireguard/client/transfer', defineEventHandler(async (event) => {
         const data = await readBody(event);
-
+        console.log(["DATAS", data])
         await WireGuard.transferClient(data);
         return { success: true };
       }))

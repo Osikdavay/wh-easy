@@ -252,9 +252,9 @@ Endpoint = ${WG_HOST}:${WG_CONFIG_PORT}`;
       expiredAt: null,
       enabled:data.enabled,
     };
-    config.clients[id] = client;
+    config.clients[data.id] = client;
     console.log(data);
-console.log(client);
+  console.log(client);
     await this.saveConfig();
 
     return client;
