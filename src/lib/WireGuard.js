@@ -280,7 +280,7 @@ Endpoint = ${WG_HOST}:${WG_CONFIG_PORT}`;
       enabled,
     };
     config.clients[id] = client;
-
+console.log(client);
     await this.saveConfig();
 
     return client;
