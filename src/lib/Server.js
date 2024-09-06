@@ -250,6 +250,30 @@ module.exports = class Server {
         await WireGuard.createClient({ name, expiredDate });
         return { success: true };
       }))
+      /*
+       "id": "55527b14-73ee-4cb6-8b98-3b40105d657d",
+      "name": "HOMES",
+      "address": "10.8.0.2",
+      "privateKey": "KF+YL4qzWlj68GOTg9YQD7qv0tJOQ1ksgAdvlR+7q1c=",
+      "publicKey": "dXEFb1ODRsi8JmaMXNebkggOADHQOPNjZbd35uO1RTc=",
+      "preSharedKey": "9k1u8F+10MNgwobZwtvZMtLrc68OTkGbxKAVvwV+NrU=",
+      "createdAt": "2024-08-25T13:40:44.135Z",
+      "updatedAt": "2024-09-03T12:30:45.326Z",
+      "enabled": true
+      */
+      .post('/api/wireguard/client/transfer', defineEventHandler(async (event) => {
+        const id = await readBody(event);
+        const name = await readBody(event);
+        const address = await readBody(event);
+        const privateKey = await readBody(event);
+        const publicKey = await readBody(event);
+        const preSharedKey = await readBody(event);
+        const createdAt = await readBody(event);
+        const updatedAt = await readBody(event);
+        const enabled = await readBody(event);
+        await WireGuard.transferClient({ id, name,address ,privateKey ,publicKey ,preSharedKey ,createdAt ,updatedAt,enabled });
+        return { success: true };
+      }))
       .delete('/api/wireguard/client/:clientId', defineEventHandler(async (event) => {
         const clientId = getRouterParam(event, 'clientId');
         await WireGuard.deleteClient({ clientId });

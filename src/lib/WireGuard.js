@@ -235,6 +235,63 @@ Endpoint = ${WG_HOST}:${WG_CONFIG_PORT}`;
     });
   }
 
+  async transferClient({ id, name,address ,privateKey ,publicKey ,preSharedKey ,createdAt ,updatedAt,enabled }) {
+    if (!name) {
+      throw new Error('Missing: Name');
+    }
+    if (!id) {
+      throw new Error('Missing: id');
+    }
+    if (!address) {
+      throw new Error('Missing: address');
+    }
+    if (!privateKey) {
+      throw new Error('Missing: privateKey');
+    }
+    if (!publicKey) {
+      throw new Error('Missing: publicKey');
+    }
+    if (!preSharedKey) {
+      throw new Error('Missing: preSharedKey');
+    }
+    if (!createdAt) {
+      throw new Error('Missing: preSharedKey');
+    }
+    if (!updatedAt) {
+      throw new Error('Missing: updatedAt');
+    }
+    if (!enabled) {
+      throw new Error('Missing: enabled');
+    }
+
+    const config = await this.getConfig();
+
+
+    const client = {
+      id,
+      name,
+      address,
+      privateKey,
+      publicKey,
+      preSharedKey,
+      createdAt,
+      updatedAt,
+      expiredAt: null,
+      enabled,
+    };
+    if (expiredDate) {
+      client.expiredAt = new Date(expiredDate);
+      client.expiredAt.setHours(23);
+      client.expiredAt.setMinutes(59);
+      client.expiredAt.setSeconds(59);
+    }
+    config.clients[id] = client;
+
+    await this.saveConfig();
+
+    return client;
+  }
+
   async createClient({ name, expiredDate }) {
     if (!name) {
       throw new Error('Missing: Name');
