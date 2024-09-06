@@ -235,51 +235,25 @@ Endpoint = ${WG_HOST}:${WG_CONFIG_PORT}`;
     });
   }
 
-  async transferClient({ id, name,address ,privateKey ,publicKey ,preSharedKey ,createdAt ,updatedAt,enabled }) {
-    if (!name) {
-      throw new Error('Missing: Name');
+  async transferClient(data) {
+    if (!data) {
+      throw new Error('Missing: Data');
     }
-    if (!id) {
-      throw new Error('Missing: id');
-    }
-    if (!address) {
-      throw new Error('Missing: address');
-    }
-    if (!privateKey) {
-      throw new Error('Missing: privateKey');
-    }
-    if (!publicKey) {
-      throw new Error('Missing: publicKey');
-    }
-    if (!preSharedKey) {
-      throw new Error('Missing: preSharedKey');
-    }
-    if (!createdAt) {
-      throw new Error('Missing: preSharedKey');
-    }
-    if (!updatedAt) {
-      throw new Error('Missing: updatedAt');
-    }
-    if (!enabled) {
-      throw new Error('Missing: enabled');
-    }
-
     const config = await this.getConfig();
-
-
     const client = {
-      id,
-      name,
-      address,
-      privateKey,
-      publicKey,
-      preSharedKey,
-      createdAt,
-      updatedAt,
+      id:data.id,
+      name:data.name,
+      address:data.address,
+      privateKey:data.privateKey,
+      publicKey:data.publicKey,
+      preSharedKey:data.preSharedKey,
+      createdAt:data.createdAt,
+      updatedAt:data.updatedAt,
       expiredAt: null,
-      enabled,
+      enabled:data.enabled,
     };
     config.clients[id] = client;
+    console.log(data);
 console.log(client);
     await this.saveConfig();
 

@@ -262,16 +262,9 @@ module.exports = class Server {
       "enabled": true
       */
       .post('/api/wireguard/client/transfer', defineEventHandler(async (event) => {
-        const id = await readBody(event);
-        const name = await readBody(event);
-        const address = await readBody(event);
-        const privateKey = await readBody(event);
-        const publicKey = await readBody(event);
-        const preSharedKey = await readBody(event);
-        const createdAt = await readBody(event);
-        const updatedAt = await readBody(event);
-        const enabled = await readBody(event);
-        await WireGuard.transferClient({ id, name,address ,privateKey ,publicKey ,preSharedKey ,createdAt ,updatedAt,enabled });
+        const data = await readBody(event);
+
+        await WireGuard.transferClient(data);
         return { success: true };
       }))
       .delete('/api/wireguard/client/:clientId', defineEventHandler(async (event) => {
