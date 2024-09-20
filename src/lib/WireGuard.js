@@ -218,6 +218,15 @@ PrivateKey = ${client.privateKey ? `${client.privateKey}` : 'REPLACE_ME'}
 Address = ${client.address}/24
 ${WG_DEFAULT_DNS ? `DNS = ${WG_DEFAULT_DNS}\n` : ''}\
 ${WG_MTU ? `MTU = ${WG_MTU}\n` : ''}\
+Jc = 22\
+Jmin = 256\
+Jmax = 512\
+S1 = 0 \
+S2 = 0\
+H1 = 1\
+H2 = 2\
+H3 = 3\
+H4 = 4\
 
 [Peer]
 PublicKey = ${config.server.publicKey}
